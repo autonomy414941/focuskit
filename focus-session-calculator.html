@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Session Calculator - FocusKit</title>
+  <meta name="description" content="Plan focus and break cycles from your available time using custom focus, short break, and long break settings.">
+  <meta name="keywords" content="focus session calculator, pomodoro planner, deep work timer planner">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/focuskit/focus-session-calculator.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Focus Session Calculator - FocusKit">
+  <meta property="og:description" content="Convert available minutes into a practical focus-session plan.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/focuskit/focus-session-calculator.html">
+  <meta property="og:site_name" content="FocusKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Focus Session Calculator - FocusKit">
+  <meta name="twitter:description" content="Convert available minutes into a practical focus-session plan.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <link rel="stylesheet" href="/focuskit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "FocusKit Focus Session Calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/focuskit/focus-session-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "FocusKit",
+            "item": "https://devtoolbox.dedyn.io/focuskit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Focus Session Calculator",
+            "item": "https://devtoolbox.dedyn.io/focuskit/focus-session-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What focus interval should I choose?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use shorter intervals for difficult starts and longer intervals for sustained technical work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do long breaks matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. A longer break every few cycles helps maintain quality and lowers cognitive fatigue."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this a timer app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool builds a plan you can follow with any timer app."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/focuskit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>FocusKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/focuskit/">Home</a>
+        <a href="/focuskit/time-block-calculator.html">Time Block</a>
+        <a href="/focuskit/meeting-load-calculator.html">Meeting Load</a>
+        <a href="/sleepkit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=focuskit-session-nav">SleepKit</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Focus Session Calculator <span class="badge">Cycle planner</span></h1>
+        <p>Build a realistic focus-and-break plan from your available time and preferred work rhythm.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="availableMinutes">Available time (minutes)</label>
+            <input id="availableMinutes" type="number" min="30" max="960" step="1" value="240">
+          </div>
+          <div>
+            <label for="focusMinutes">Focus length per cycle (minutes)</label>
+            <input id="focusMinutes" type="number" min="10" max="120" step="1" value="45">
+          </div>
+          <div>
+            <label for="shortBreakMinutes">Short break (minutes)</label>
+            <input id="shortBreakMinutes" type="number" min="3" max="30" step="1" value="10">
+          </div>
+          <div>
+            <label for="longBreakMinutes">Long break (minutes)</label>
+            <input id="longBreakMinutes" type="number" min="10" max="60" step="1" value="20">
+          </div>
+          <div>
+            <label for="longBreakEvery">Long break every N cycles</label>
+            <input id="longBreakEvery" type="number" min="2" max="8" step="1" value="3">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Build Session Plan</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your focus session plan will appear here.</strong>
+        </div>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Focus Session FAQ</h3>
+        <p><strong>How many cycles should I run in one day?</strong><br>Most people sustain 3 to 6 quality cycles depending on task intensity and context switching.</p>
+        <p><strong>Should I always take all planned breaks?</strong><br>Yes. Planned breaks improve output quality and reduce error rates in later cycles.</p>
+        <p><strong>Can I use this for study planning?</strong><br>Yes. The same cycle logic works for reading, writing, and exam prep sessions.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Related Tool</h3>
+        <p>After building a session plan, use the <a href="/focuskit/time-block-calculator.html?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=focuskit-session-related">Time Block Calculator</a> to estimate how many days your task list will need.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const availableMinutesInput = document.getElementById('availableMinutes');
+    const focusMinutesInput = document.getElementById('focusMinutes');
+    const shortBreakMinutesInput = document.getElementById('shortBreakMinutes');
+    const longBreakMinutesInput = document.getElementById('longBreakMinutes');
+    const longBreakEveryInput = document.getElementById('longBreakEvery');
+    const result = document.getElementById('result');
+
+    function toClock(totalMinutes) {
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      if (hours <= 0) {
+        return `${minutes}m`;
+      }
+      return `${hours}h ${minutes}m`;
+    }
+
+    function calculatePlan() {
+      const availableMinutes = Number(availableMinutesInput.value);
+      const focusMinutes = Number(focusMinutesInput.value);
+      const shortBreakMinutes = Number(shortBreakMinutesInput.value);
+      const longBreakMinutes = Number(longBreakMinutesInput.value);
+      const longBreakEvery = Number(longBreakEveryInput.value);
+
+      if (![availableMinutes, focusMinutes, shortBreakMinutes, longBreakMinutes, longBreakEvery].every(Number.isFinite)) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter valid numeric values for all fields.</strong>';
+        return;
+      }
+      if (availableMinutes < 30 || availableMinutes > 960) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Available time should be between 30 and 960 minutes.</strong>';
+        return;
+      }
+      if (focusMinutes < 10 || focusMinutes > 120) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Focus length should be between 10 and 120 minutes.</strong>';
+        return;
+      }
+      if (shortBreakMinutes < 3 || shortBreakMinutes > 30) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Short break should be between 3 and 30 minutes.</strong>';
+        return;
+      }
+      if (longBreakMinutes < 10 || longBreakMinutes > 60) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Long break should be between 10 and 60 minutes.</strong>';
+        return;
+      }
+      if (!Number.isInteger(longBreakEvery) || longBreakEvery < 2 || longBreakEvery > 8) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Long break cadence should be a whole number between 2 and 8.</strong>';
+        return;
+      }
+
+      let timeUsed = 0;
+      let cycles = 0;
+      let totalFocus = 0;
+      let totalBreak = 0;
+
+      while (true) {
+        const nextCycle = cycles + 1;
+        const breakMinutes = nextCycle % longBreakEvery === 0 ? longBreakMinutes : shortBreakMinutes;
+        const required = focusMinutes + breakMinutes;
+
+        if (timeUsed + required <= availableMinutes) {
+          cycles = nextCycle;
+          timeUsed += required;
+          totalFocus += focusMinutes;
+          totalBreak += breakMinutes;
+          continue;
+        }
+
+        if (timeUsed + focusMinutes <= availableMinutes) {
+          cycles = nextCycle;
+          timeUsed += focusMinutes;
+          totalFocus += focusMinutes;
+        }
+        break;
+      }
+
+      if (cycles === 0) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Not enough time for one cycle. Lower interval lengths or add available time.</strong>';
+        return;
+      }
+
+      const idleMinutes = Math.max(0, availableMinutes - timeUsed);
+      const focusShare = Math.round((totalFocus / timeUsed) * 100);
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Plan: ${cycles} cycle(s), ${toClock(totalFocus)} deep work</strong>
+        <ul>
+          <li>Total scheduled time: ${toClock(timeUsed)} of ${toClock(availableMinutes)}</li>
+          <li>Break time included: ${toClock(totalBreak)}</li>
+          <li>Focus share of scheduled time: ${focusShare}%</li>
+          <li>Unallocated buffer: ${toClock(idleMinutes)}</li>
+        </ul>
+        <div class="small">Tip: keep 10 to 20 minutes buffer for shutdown notes and priority reset.</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculatePlan);
+    calculatePlan();
+  </script>
+</body>
+</html>

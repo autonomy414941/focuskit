@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Load Calculator - FocusKit</title>
+  <meta name="description" content="Estimate how meeting volume and context switching reduce deep-work capacity per day and week.">
+  <meta name="keywords" content="meeting load calculator, maker time calculator, meeting cost estimator">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/focuskit/meeting-load-calculator.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meeting Load Calculator - FocusKit">
+  <meta property="og:description" content="Quantify how much execution time meetings remove from your week.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/focuskit/meeting-load-calculator.html">
+  <meta property="og:site_name" content="FocusKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Meeting Load Calculator - FocusKit">
+  <meta name="twitter:description" content="Quantify how much execution time meetings remove from your week.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <link rel="stylesheet" href="/focuskit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "FocusKit Meeting Load Calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/focuskit/meeting-load-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "FocusKit",
+            "item": "https://devtoolbox.dedyn.io/focuskit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Meeting Load Calculator",
+            "item": "https://devtoolbox.dedyn.io/focuskit/meeting-load-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is context switching cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is the time lost before and after meetings while preparing, transitioning, and regaining focus."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can this estimate be used?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use it to set no-meeting blocks, redesign schedules, and defend realistic delivery dates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does every meeting have the same cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. High-context meetings usually impose larger transition costs than routine syncs."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/focuskit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>FocusKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/focuskit/">Home</a>
+        <a href="/focuskit/focus-session-calculator.html">Focus Session</a>
+        <a href="/focuskit/time-block-calculator.html">Time Block</a>
+        <a href="/datekit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=focuskit-meeting-nav">DateKit</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Meeting Load Calculator <span class="badge">Maker-time impact</span></h1>
+        <p>Estimate how recurring meetings and transitions reduce your usable focus capacity each week.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="workdayHours">Workday length (hours)</label>
+            <input id="workdayHours" type="number" min="4" max="16" step="0.5" value="8">
+          </div>
+          <div>
+            <label for="meetingsPerDay">Meetings per day</label>
+            <input id="meetingsPerDay" type="number" min="0" max="20" step="1" value="4">
+          </div>
+          <div>
+            <label for="avgMeetingMinutes">Average meeting length (minutes)</label>
+            <input id="avgMeetingMinutes" type="number" min="10" max="180" step="5" value="30">
+          </div>
+          <div>
+            <label for="switchCost">Context switch per meeting (minutes)</label>
+            <input id="switchCost" type="number" min="0" max="45" step="1" value="8">
+          </div>
+          <div>
+            <label for="focusTargetHours">Desired daily deep-work target (hours)</label>
+            <input id="focusTargetHours" type="number" min="1" max="10" step="0.5" value="4">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Calculate Meeting Cost</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your meeting-load estimate will appear here.</strong>
+        </div>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Meeting Load FAQ</h3>
+        <p><strong>What is a healthy meeting budget?</strong><br>Teams doing execution-heavy work often keep meetings under 25% to 35% of workday time.</p>
+        <p><strong>How should switch cost be estimated?</strong><br>Start with 5 to 10 minutes and calibrate with observed transition friction in your workflow.</p>
+        <p><strong>Can this support schedule redesign?</strong><br>Yes. Use the output to justify no-meeting blocks and asynchronous updates.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Related Tool</h3>
+        <p>After quantifying meeting impact, use the <a href="/focuskit/focus-session-calculator.html?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=focuskit-meeting-related">Focus Session Calculator</a> to rebuild realistic execution blocks.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const workdayHoursInput = document.getElementById('workdayHours');
+    const meetingsPerDayInput = document.getElementById('meetingsPerDay');
+    const avgMeetingMinutesInput = document.getElementById('avgMeetingMinutes');
+    const switchCostInput = document.getElementById('switchCost');
+    const focusTargetHoursInput = document.getElementById('focusTargetHours');
+    const result = document.getElementById('result');
+
+    function roundTo(value, decimals) {
+      const scale = 10 ** decimals;
+      return Math.round(value * scale) / scale;
+    }
+
+    function calculateMeetingLoad() {
+      const workdayHours = Number(workdayHoursInput.value);
+      const meetingsPerDay = Number(meetingsPerDayInput.value);
+      const avgMeetingMinutes = Number(avgMeetingMinutesInput.value);
+      const switchCost = Number(switchCostInput.value);
+      const focusTargetHours = Number(focusTargetHoursInput.value);
+
+      if (![workdayHours, meetingsPerDay, avgMeetingMinutes, switchCost, focusTargetHours].every(Number.isFinite)) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter valid values for all fields.</strong>';
+        return;
+      }
+      if (workdayHours < 4 || workdayHours > 16) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Workday length should be between 4 and 16 hours.</strong>';
+        return;
+      }
+      if (!Number.isInteger(meetingsPerDay) || meetingsPerDay < 0 || meetingsPerDay > 20) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Meetings per day should be a whole number between 0 and 20.</strong>';
+        return;
+      }
+      if (avgMeetingMinutes < 10 || avgMeetingMinutes > 180) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Average meeting length should be between 10 and 180 minutes.</strong>';
+        return;
+      }
+      if (switchCost < 0 || switchCost > 45) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Switch cost should be between 0 and 45 minutes.</strong>';
+        return;
+      }
+      if (focusTargetHours < 1 || focusTargetHours > 10) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Focus target should be between 1 and 10 hours.</strong>';
+        return;
+      }
+
+      const totalMeetingMinutes = meetingsPerDay * avgMeetingMinutes;
+      const totalSwitchMinutes = meetingsPerDay * switchCost;
+      const consumedMinutes = totalMeetingMinutes + totalSwitchMinutes;
+      const availableMinutes = workdayHours * 60;
+      const remainingMinutes = Math.max(0, availableMinutes - consumedMinutes);
+      const weeklyLostHours = (consumedMinutes * 5) / 60;
+      const lostShare = Math.min(100, (consumedMinutes / availableMinutes) * 100);
+      const focusGapHours = Math.max(0, focusTargetHours - remainingMinutes / 60);
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Estimated remaining focus time: ${roundTo(remainingMinutes / 60, 2)} h/day</strong>
+        <ul>
+          <li>Meetings: ${roundTo(totalMeetingMinutes / 60, 2)} h/day</li>
+          <li>Switching cost: ${roundTo(totalSwitchMinutes / 60, 2)} h/day</li>
+          <li>Total schedule consumed: ${roundTo(consumedMinutes / 60, 2)} h/day (${roundTo(lostShare, 1)}% of day)</li>
+          <li>Weekly time lost to meetings + switching: ${roundTo(weeklyLostHours, 1)} h/week</li>
+          <li>Gap vs target deep work: ${roundTo(focusGapHours, 2)} h/day</li>
+        </ul>
+        <div class="small">Tip: cluster meetings into fewer windows to recover larger uninterrupted execution blocks.</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculateMeetingLoad);
+    calculateMeetingLoad();
+  </script>
+</body>
+</html>

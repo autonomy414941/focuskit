@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Block Calculator - FocusKit</title>
+  <meta name="description" content="Estimate task-list completion time using task count, average task duration, planning buffer, and daily capacity.">
+  <meta name="keywords" content="time block calculator, task planning calculator, workload estimator">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/focuskit/time-block-calculator.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Time Block Calculator - FocusKit">
+  <meta property="og:description" content="Calculate realistic workday requirements for your task backlog.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/focuskit/time-block-calculator.html">
+  <meta property="og:site_name" content="FocusKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Time Block Calculator - FocusKit">
+  <meta name="twitter:description" content="Calculate realistic workday requirements for your task backlog.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <link rel="stylesheet" href="/focuskit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "FocusKit Time Block Calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/focuskit/time-block-calculator.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "FocusKit",
+            "item": "https://devtoolbox.dedyn.io/focuskit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Time Block Calculator",
+            "item": "https://devtoolbox.dedyn.io/focuskit/time-block-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why include a buffer percentage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Buffer accounts for interruptions, rework, and setup overhead not captured in base estimates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much daily focus capacity is realistic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many knowledge workers sustain 3 to 5 hours of deep execution on typical workdays."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for weekly planning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Convert daily capacity and required days into weekly blocks for planning."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/focuskit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>FocusKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/focuskit/">Home</a>
+        <a href="/focuskit/focus-session-calculator.html">Focus Session</a>
+        <a href="/focuskit/meeting-load-calculator.html">Meeting Load</a>
+        <a href="/budgetkit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=focuskit-block-nav">BudgetKit</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Time Block Calculator <span class="badge">Workload estimate</span></h1>
+        <p>Translate backlog size into realistic execution hours and estimated workdays.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="taskCount">Number of tasks</label>
+            <input id="taskCount" type="number" min="1" max="2000" step="1" value="24">
+          </div>
+          <div>
+            <label for="avgTaskMinutes">Average minutes per task</label>
+            <input id="avgTaskMinutes" type="number" min="5" max="480" step="1" value="35">
+          </div>
+          <div>
+            <label for="bufferPct">Planning buffer (%)</label>
+            <input id="bufferPct" type="number" min="0" max="200" step="1" value="25">
+          </div>
+          <div>
+            <label for="dailyFocusHours">Daily focus capacity (hours)</label>
+            <input id="dailyFocusHours" type="number" min="1" max="12" step="0.5" value="4">
+          </div>
+          <div>
+            <label for="parallelStreams">Parallel streams</label>
+            <input id="parallelStreams" type="number" min="1" max="6" step="1" value="1">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Estimate Timeline</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your workload estimate will appear here.</strong>
+        </div>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Time Blocking FAQ</h3>
+        <p><strong>Should every task use the same duration estimate?</strong><br>No. Use separate runs for short and long tasks if your backlog is mixed.</p>
+        <p><strong>What does parallel streams mean?</strong><br>It approximates how many independent work tracks can be executed at once without blocking.</p>
+        <p><strong>How often should I recalibrate estimates?</strong><br>At least weekly, based on actual completion data and newly discovered task complexity.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Related Tool</h3>
+        <p>If meetings are reducing your execution capacity, run the <a href="/focuskit/meeting-load-calculator.html?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=crosspromo-top-organic&amp;utm_content=focuskit-block-related">Meeting Load Calculator</a> before finalizing deadlines.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const taskCountInput = document.getElementById('taskCount');
+    const avgTaskMinutesInput = document.getElementById('avgTaskMinutes');
+    const bufferPctInput = document.getElementById('bufferPct');
+    const dailyFocusHoursInput = document.getElementById('dailyFocusHours');
+    const parallelStreamsInput = document.getElementById('parallelStreams');
+    const result = document.getElementById('result');
+
+    function roundTo(value, decimals) {
+      const scale = 10 ** decimals;
+      return Math.round(value * scale) / scale;
+    }
+
+    function estimateTimeline() {
+      const taskCount = Number(taskCountInput.value);
+      const avgTaskMinutes = Number(avgTaskMinutesInput.value);
+      const bufferPct = Number(bufferPctInput.value);
+      const dailyFocusHours = Number(dailyFocusHoursInput.value);
+      const parallelStreams = Number(parallelStreamsInput.value);
+
+      if (![taskCount, avgTaskMinutes, bufferPct, dailyFocusHours, parallelStreams].every(Number.isFinite)) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter valid values for all inputs.</strong>';
+        return;
+      }
+      if (!Number.isInteger(taskCount) || taskCount < 1 || taskCount > 2000) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Task count should be a whole number between 1 and 2000.</strong>';
+        return;
+      }
+      if (avgTaskMinutes < 5 || avgTaskMinutes > 480) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Average task duration should be between 5 and 480 minutes.</strong>';
+        return;
+      }
+      if (bufferPct < 0 || bufferPct > 200) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Buffer should be between 0% and 200%.</strong>';
+        return;
+      }
+      if (dailyFocusHours < 1 || dailyFocusHours > 12) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Daily focus capacity should be between 1 and 12 hours.</strong>';
+        return;
+      }
+      if (!Number.isInteger(parallelStreams) || parallelStreams < 1 || parallelStreams > 6) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Parallel streams should be a whole number between 1 and 6.</strong>';
+        return;
+      }
+
+      const baseMinutes = taskCount * avgTaskMinutes;
+      const bufferedMinutes = baseMinutes * (1 + bufferPct / 100);
+      const totalHours = bufferedMinutes / 60;
+      const dailyCapacityHours = dailyFocusHours * parallelStreams;
+      const requiredDays = totalHours / dailyCapacityHours;
+      const requiredWeeks = requiredDays / 5;
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Estimated effort: ${roundTo(totalHours, 1)} hours</strong>
+        <ul>
+          <li>Base workload: ${roundTo(baseMinutes / 60, 1)} hours</li>
+          <li>Buffer added: ${roundTo((bufferedMinutes - baseMinutes) / 60, 1)} hours (${bufferPct}%)</li>
+          <li>Daily capacity used: ${roundTo(dailyCapacityHours, 1)} hours/day</li>
+          <li>Timeline: ${roundTo(requiredDays, 1)} workdays (~${roundTo(requiredWeeks, 1)} workweeks)</li>
+        </ul>
+        <div class="small">Tip: split high-risk tasks into separate estimates before committing to dates.</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', estimateTimeline);
+    estimateTimeline();
+  </script>
+</body>
+</html>
