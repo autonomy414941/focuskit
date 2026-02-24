@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Focus Planner - FocusKit</title>
+  <meta name="description" content="Plan a realistic weekly deep-work schedule by combining meeting load, switch cost, buffer, and focus-session sizing.">
+  <meta name="keywords" content="weekly focus planner, deep work planner, productivity planning, meeting load planning">
+  <link rel="canonical" href="https://devtoolbox.dedyn.io/focuskit/weekly-focus-planner.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weekly Focus Planner - FocusKit">
+  <meta property="og:description" content="Build a realistic weekly deep-work plan from your meeting schedule and focus-session size.">
+  <meta property="og:url" content="https://devtoolbox.dedyn.io/focuskit/weekly-focus-planner.html">
+  <meta property="og:site_name" content="FocusKit">
+  <meta property="og:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Weekly Focus Planner - FocusKit">
+  <meta name="twitter:description" content="Turn meeting-heavy schedules into realistic deep-work plans.">
+  <meta name="twitter:image" content="https://devtoolbox.dedyn.io/og/default.png">
+  <link rel="stylesheet" href="/focuskit/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "FocusKit Weekly Focus Planner",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "url": "https://devtoolbox.dedyn.io/focuskit/weekly-focus-planner.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "FocusKit",
+            "item": "https://devtoolbox.dedyn.io/focuskit/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Weekly Focus Planner",
+            "item": "https://devtoolbox.dedyn.io/focuskit/weekly-focus-planner.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why include switch cost in a weekly plan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Switch cost captures the setup and recovery time around meetings that usually reduces true deep-work capacity."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What buffer percentage should I use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Start with 15% to 25% and adjust based on interruption frequency and uncertainty in task scope."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does this differ from a task timeline estimate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This planner sets realistic weekly focus capacity. Use the Time Block Calculator to estimate task backlog completion against that capacity."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="/focuskit/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>FocusKit</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/focuskit/">Home</a>
+        <a href="/focuskit/focus-session-calculator.html">Focus Session</a>
+        <a href="/focuskit/time-block-calculator.html">Time Block</a>
+        <a href="/focuskit/meeting-load-calculator.html">Meeting Load</a>
+        <a href="/kits/">All Kits</a>
+        <a href="/sleepkit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-nav-sleep">SleepKit</a>
+        <a href="/budgetkit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-nav-budget">BudgetKit</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <h1>Weekly Focus Planner <span class="badge">Execution capacity</span></h1>
+        <p>Convert your weekly meeting reality into a practical deep-work plan before committing to timelines.</p>
+      </section>
+
+      <section class="panel card">
+        <div class="grid form-grid">
+          <div>
+            <label for="workdaysPerWeek">Workdays per week</label>
+            <input id="workdaysPerWeek" type="number" min="3" max="7" step="1" value="5">
+          </div>
+          <div>
+            <label for="workdayHours">Workday length (hours)</label>
+            <input id="workdayHours" type="number" min="5" max="14" step="0.5" value="8">
+          </div>
+          <div>
+            <label for="meetingsPerDay">Meetings per day</label>
+            <input id="meetingsPerDay" type="number" min="0" max="20" step="1" value="4">
+          </div>
+          <div>
+            <label for="avgMeetingMinutes">Average meeting length (minutes)</label>
+            <input id="avgMeetingMinutes" type="number" min="10" max="180" step="5" value="30">
+          </div>
+          <div>
+            <label for="switchMinutes">Context switch per meeting (minutes)</label>
+            <input id="switchMinutes" type="number" min="0" max="45" step="1" value="8">
+          </div>
+          <div>
+            <label for="bufferPct">Planning buffer (%)</label>
+            <input id="bufferPct" type="number" min="0" max="50" step="1" value="20">
+          </div>
+          <div>
+            <label for="focusSessionMinutes">Target focus session length (minutes)</label>
+            <input id="focusSessionMinutes" type="number" min="20" max="120" step="5" value="50">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="calculateBtn">Build Weekly Plan</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">
+          <strong>Your weekly focus plan will appear here.</strong>
+        </div>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>How to Use This Plan</h3>
+        <ul>
+          <li>Step 1: Use this output as your weekly deep-work capacity baseline.</li>
+          <li>Step 2: Build session rhythm in the <a href="/focuskit/focus-session-calculator.html?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-checklist-session">Focus Session Calculator</a>.</li>
+          <li>Step 3: Estimate backlog completion in the <a href="/focuskit/time-block-calculator.html?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-checklist-timeblock">Time Block Calculator</a>.</li>
+          <li>Step 4: Re-check meeting overhead in the <a href="/focuskit/meeting-load-calculator.html?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-checklist-meeting">Meeting Load Calculator</a> after any schedule changes.</li>
+        </ul>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Weekly Planning FAQ</h3>
+        <p><strong>Should I plan using optimistic or conservative meeting counts?</strong><br>Use conservative counts for delivery planning and optimistic counts only for best-case scenarios.</p>
+        <p><strong>What if my meeting load changes daily?</strong><br>Run separate scenarios and use the lower focus-capacity result to reduce missed commitments.</p>
+        <p><strong>How often should I rebuild this plan?</strong><br>At least once per week or whenever team cadence changes significantly.</p>
+      </section>
+
+      <section class="panel card" style="margin-top:14px;">
+        <h3>Related Tools</h3>
+        <p>Pair your weekly plan with milestone math in <a href="/datekit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-related-date">DateKit</a>, and check budget runway assumptions in <a href="/budgetkit/?utm_source=focuskit&amp;utm_medium=internal&amp;utm_campaign=focuskit-opportunity-sprint&amp;utm_content=focuskit-weekly-related-budget">BudgetKit</a>. Explore the full collection in <a href="/kits/">All Kits</a>.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const workdaysPerWeekInput = document.getElementById('workdaysPerWeek');
+    const workdayHoursInput = document.getElementById('workdayHours');
+    const meetingsPerDayInput = document.getElementById('meetingsPerDay');
+    const avgMeetingMinutesInput = document.getElementById('avgMeetingMinutes');
+    const switchMinutesInput = document.getElementById('switchMinutes');
+    const bufferPctInput = document.getElementById('bufferPct');
+    const focusSessionMinutesInput = document.getElementById('focusSessionMinutes');
+    const result = document.getElementById('result');
+
+    function roundTo(value, decimals) {
+      const scale = 10 ** decimals;
+      return Math.round(value * scale) / scale;
+    }
+
+    function buildPlan() {
+      const workdaysPerWeek = Number(workdaysPerWeekInput.value);
+      const workdayHours = Number(workdayHoursInput.value);
+      const meetingsPerDay = Number(meetingsPerDayInput.value);
+      const avgMeetingMinutes = Number(avgMeetingMinutesInput.value);
+      const switchMinutes = Number(switchMinutesInput.value);
+      const bufferPct = Number(bufferPctInput.value);
+      const focusSessionMinutes = Number(focusSessionMinutesInput.value);
+
+      if (![workdaysPerWeek, workdayHours, meetingsPerDay, avgMeetingMinutes, switchMinutes, bufferPct, focusSessionMinutes].every(Number.isFinite)) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Please enter valid values for all fields.</strong>';
+        return;
+      }
+      if (!Number.isInteger(workdaysPerWeek) || workdaysPerWeek < 3 || workdaysPerWeek > 7) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Workdays per week should be a whole number between 3 and 7.</strong>';
+        return;
+      }
+      if (workdayHours < 5 || workdayHours > 14) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Workday length should be between 5 and 14 hours.</strong>';
+        return;
+      }
+      if (!Number.isInteger(meetingsPerDay) || meetingsPerDay < 0 || meetingsPerDay > 20) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Meetings per day should be a whole number between 0 and 20.</strong>';
+        return;
+      }
+      if (avgMeetingMinutes < 10 || avgMeetingMinutes > 180) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Average meeting length should be between 10 and 180 minutes.</strong>';
+        return;
+      }
+      if (switchMinutes < 0 || switchMinutes > 45) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Context switch time should be between 0 and 45 minutes.</strong>';
+        return;
+      }
+      if (bufferPct < 0 || bufferPct > 50) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Buffer should be between 0% and 50%.</strong>';
+        return;
+      }
+      if (focusSessionMinutes < 20 || focusSessionMinutes > 120) {
+        result.className = 'result warn';
+        result.innerHTML = '<strong>Focus session size should be between 20 and 120 minutes.</strong>';
+        return;
+      }
+
+      const totalWorkMinutes = workdaysPerWeek * workdayHours * 60;
+      const dailyMeetingLoad = meetingsPerDay * (avgMeetingMinutes + switchMinutes);
+      const weeklyMeetingLoad = workdaysPerWeek * dailyMeetingLoad;
+      const rawFocusMinutes = Math.max(0, totalWorkMinutes - weeklyMeetingLoad);
+      const bufferedFocusMinutes = rawFocusMinutes * (1 - bufferPct / 100);
+      const weeklyFocusHours = bufferedFocusMinutes / 60;
+      const dailyFocusHours = weeklyFocusHours / workdaysPerWeek;
+      const focusSessions = Math.floor(bufferedFocusMinutes / focusSessionMinutes);
+      const meetingSharePct = Math.min(100, (weeklyMeetingLoad / totalWorkMinutes) * 100);
+
+      const guidance = dailyFocusHours >= 4
+        ? 'Your weekly plan supports high execution throughput. Protect these blocks on the calendar.'
+        : dailyFocusHours >= 2.5
+          ? 'Your plan is workable, but scope control is important to avoid spillover.'
+          : 'Current meeting load leaves limited deep-work capacity. Reduce meeting volume or shorten commitments.';
+
+      result.className = 'result ok';
+      result.innerHTML = `
+        <strong>Planned deep-work capacity: ${roundTo(weeklyFocusHours, 1)} h/week (${roundTo(dailyFocusHours, 2)} h/day)</strong>
+        <ul>
+          <li>Total schedule time: ${roundTo(totalWorkMinutes / 60, 1)} h/week</li>
+          <li>Meetings + switching: ${roundTo(weeklyMeetingLoad / 60, 1)} h/week (${roundTo(meetingSharePct, 1)}% of schedule)</li>
+          <li>Buffer reserved: ${bufferPct}%</li>
+          <li>Estimated focus sessions: ${focusSessions} sessions/week at ${focusSessionMinutes} minutes each</li>
+        </ul>
+        <div class="small">${guidance}</div>
+      `;
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', buildPlan);
+    buildPlan();
+  </script>
+</body>
+</html>
